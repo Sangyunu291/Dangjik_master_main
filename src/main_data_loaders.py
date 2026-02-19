@@ -56,7 +56,6 @@ def load_worker_info_map(worker_data)->None:
 
 def init_date_event_hash()->None:
     global date_event_hash, date_list, all_duty_keys, all_exp_keys
-    
     for day in date_list:
         date_event_hash.set(day, ChainingHashTable(20))
         for h_key in (all_duty_keys + all_exp_keys):

@@ -35,8 +35,8 @@ def duty_generator(start_date, end_date, ld_date, last_workers, event_list):
     date_range = (start_date, end_date)
     engine = MainEngine(date_range, worker_data, exceptions)
     engine.exp_manager.runManage()
-
-    for event in event_list:
+    print('----------------')
+    for event in range(5):
         if event == DUTY_ENUM.SUB_GUARD:
             engine.sg_manager.runManage(last_workers.get('sub'))
         elif event == DUTY_ENUM.DISH:
@@ -47,7 +47,7 @@ def duty_generator(start_date, end_date, ld_date, last_workers, event_list):
             engine.st_manager.runManage(last_workers.get('sr'), last_workers.get('jr'))
         elif event == DUTY_ENUM.CCTV:
             engine.cctv_manager.runManage(last_workers.get('cctv'))       
-
+    print('----------------')
     engine.export_result_as_file('result_file.csv')
 
     return "SUCCESS: 근무표 생성이 완료되었습니다."

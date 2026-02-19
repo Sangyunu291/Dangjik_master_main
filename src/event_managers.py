@@ -16,13 +16,14 @@ class ExpManager(Manager):
     def runManage(self):
         global_filter(md.date_event_hash, md.date_list, md.exp_list)
 
+
 class SubGuardManager(Manager):
     def __init__(self):
         self.c_list: Circular_List = md.worker_list #worker_list from main_data file
 
     def runManage(self, last_run)->None:
-        ptr_sub_guard = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))     
-
+        ptr_sub_guard = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))
+        
         for day in md.date_list:
             event_hash: ChainingHashTable = md.date_event_hash.get(day)
             assigned_today: set = self.get_assigned_today(day)
@@ -34,7 +35,6 @@ class DishManager(Manager):
 
     def runManage(self, last_run, ld_date)->None:
         ptr_dish = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))
-        
         for day in md.date_list:
             event_hash: ChainingHashTable = md.date_event_hash.get(day)
             assigned_today: set = self.get_assigned_today(day)
