@@ -16,14 +16,13 @@ class ExpManager(Manager):
     def runManage(self):
         global_filter(md.date_event_hash, md.date_list, md.exp_list)
 
-
 class SubGuardManager(Manager):
     def __init__(self):
         self.c_list: Circular_List = md.worker_list #worker_list from main_data file
 
     def runManage(self, last_run)->None:
-        ptr_sub_guard = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))
-        
+        ptr_sub_guard = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))     
+
         for day in md.date_list:
             event_hash: ChainingHashTable = md.date_event_hash.get(day)
             assigned_today: set = self.get_assigned_today(day)
@@ -35,6 +34,7 @@ class DishManager(Manager):
 
     def runManage(self, last_run, ld_date)->None:
         ptr_dish = List_Pointer(self.c_list, get_start_index(self.c_list, last_run))
+        
         for day in md.date_list:
             event_hash: ChainingHashTable = md.date_event_hash.get(day)
             assigned_today: set = self.get_assigned_today(day)
@@ -70,7 +70,7 @@ class CCTVManager(Manager):
 
             for c_key in md.cctv_keys:
                 for _ in range(3):
-                    event_hash.get(c_key).append(get_next_available(ptr_cctv, assigned_today, DUTY_ENUM.NIGHT))
+                    event_hash.get(c_key).append(get_next_available(ptr_cctv, assigned_today, DUTY_ENUM.CCTV))
 
 class SentinelManager(Manager):
     def __init__(self):
@@ -134,9 +134,7 @@ class MainEngine:
     def export_result_as_file(self, file_name):
         with open(file_name, 'w', newline='', encoding='utf-8-sig') as f:
             writer = csv.writer(f)
-            writer.writerow(["이름"] + md.date_list)
+            writer.writerow(["군번"] + md.date_list)
             matrix = self.__get_hash_to_matrix_type1()
             for row in matrix:
                 writer.writerow(row)
-                
-

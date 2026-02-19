@@ -2,9 +2,8 @@ from enum import IntEnum
 from .data_structures import ChainingHashTable, Circular_List, List_Pointer
 from .filter import task_filter
 
+
 from .main_data_loaders import worker_info_map 
-
-
 
 # --- [근무 인덱스 enum] --- 
 class DUTY_ENUM(IntEnum):
@@ -30,6 +29,4 @@ def get_next_available(ptr, assigned_set, duty_type):
                 
         assigned_set.add(sn)
         return sn
-
-
 

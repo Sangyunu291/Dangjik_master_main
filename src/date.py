@@ -4,7 +4,7 @@ from datetime import datetime, date, timedelta
 
 date_tuple = (
    'MON', 'TUE', 
-   'WEN', 'THU', 
+   'WED', 'THU', 
    'FRI', 'SAT', 'SUN'
 )
 
@@ -25,6 +25,12 @@ def get_date_diff(date_str_a, date_str_b):
     d2 = datetime.strptime(date_str_b, FORM)
     return abs((d2 - d1).days)
 
+
+def subtract_days_from_date(date_str, days_to_subtract):
+    date_obj = datetime.strptime(date_str, date_format)
+    result_date = date_obj - timedelta(days=days_to_subtract)
+    return result_date.strftime(FORM)
+
 def get_custom_date_list(start_str, end_str):
     start = datetime.strptime(start_str, FORM)
     end = datetime.strptime(end_str, FORM)
@@ -42,8 +48,3 @@ def get_day_of_week(day_str): # 특정 date의 요일을 반환
 
 def is_weekend(day_str):
     return get_day_of_week(day_str) == 'SAT' or get_day_of_week(day_str) == 'SUN'
-
-
-
-
-
