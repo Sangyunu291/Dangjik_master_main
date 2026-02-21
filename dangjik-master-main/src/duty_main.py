@@ -36,7 +36,7 @@ def duty_generator(start_date, end_date, ld_date, last_workers, event_list):
     engine = MainEngine(date_range, worker_data, exceptions)
     engine.exp_manager.runManage()
     print('----------------')
-    for event in range(5):
+    for event in event_list:
         if event == DUTY_ENUM.SUB_GUARD:
             engine.sg_manager.runManage(last_workers.get('sub'))
         elif event == DUTY_ENUM.DISH:
